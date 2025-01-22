@@ -1,9 +1,9 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   imports = [
     ./hardware-configuration.nix # Include the results of the hardware scan.
-    <home-manager/nixos>
+    inputs.home-manager.nixosModules.home-manager
   ];
 
   boot.kernelParams = [
