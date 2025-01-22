@@ -278,14 +278,14 @@
       ];
     };
   };
-  services.flatpak.enable = true;
-  systemd.services.flatpak-repo = {
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
+  # services.flatpak.enable = true;
+  # systemd.services.flatpak-repo = {
+  #   wantedBy = [ "multi-user.target" ];
+  #   path = [ pkgs.flatpak ];
+  #   script = ''
+  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+  #   '';
+  # };
 
   home-manager.useUserPackages = true;
   home-manager.useGlobalPkgs = true;
@@ -295,60 +295,7 @@
     isNormalUser = true;
     description = "ktrd";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
-    packages = with pkgs; [
-      curlftpfs
-
-      gimp
-      chromium
-      tor-browser
-      telegram-desktop
-      discord
-      betterdiscordctl
-      zoom-us
-      element-desktop
-      hexchat
-
-      qbittorrent
-      obs-studio
-      xonotic
-      evince
-      mpv
-      mpvScripts.mpris
-      helvum
-      easyeffects
-
-      nitrogen
-      xwinwrap
-      shotgun
-      hacksaw
-      xclip
-      xdotool
-      xsel
-      xclicker
-      tmux
-      kalker
-      krita
-      openscad
-      f3d
-
-      wineWowPackages.staging
-      winetricks
-      protontricks
-      distrobox
-
-      kitty
-      kitty-themes
-      fastfetch
-
-      libsForQt5.breeze-icons
-
-      prismlauncher
-      gzdoom
-
-    ];
   };
-
-
 
   home-manager.backupFileExtension = "backup";
 
@@ -534,6 +481,54 @@
     xorg.xhost
     xorg.xkill
 
+    curlftpfs
+
+    gimp
+    chromium
+    tor-browser
+    telegram-desktop
+    discord
+    betterdiscordctl
+    zoom-us
+    element-desktop
+    hexchat
+
+    qbittorrent
+    obs-studio
+    xonotic
+    evince
+    mpv
+    mpvScripts.mpris
+    helvum
+    easyeffects
+
+    nitrogen
+    xwinwrap
+    shotgun
+    hacksaw
+    xclip
+    xdotool
+    xsel
+    xclicker
+    tmux
+    kalker
+    krita
+    openscad
+    f3d
+
+    wineWowPackages.staging
+    winetricks
+    protontricks
+    distrobox
+
+    kitty
+    kitty-themes
+    fastfetch
+
+    libsForQt5.breeze-icons
+
+    prismlauncher
+    gzdoom
     lutris
   ];
 
