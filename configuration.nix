@@ -295,6 +295,12 @@
     isNormalUser = true;
     description = "ktrd";
     extraGroups = [ "networkmanager" "wheel" "libvirtd" "docker" ];
+    packages = with pkgs; [
+      wineWowPackages.staging
+      winetricks
+      protontricks
+      distrobox
+    ];
   };
 
   home-manager.backupFileExtension = "backup";
@@ -515,11 +521,6 @@
     krita
     openscad
     f3d
-
-    wineWowPackages.staging
-    winetricks
-    protontricks
-    distrobox
 
     kitty
     kitty-themes
