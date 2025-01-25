@@ -20,7 +20,6 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             backupFileExtension = "backup";
-            extraSpecialArgs = { inherit self nixpkgs inputs; };
             users.ktrd = import ./home.nix;
           };
         }

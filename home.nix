@@ -101,18 +101,6 @@
     };
     desktopEntries =
       {
-        editConfig = {
-          name = "Edit system config";
-          terminal = false;
-          exec = "kitty --hold -e bash ${./editConfig.sh}";
-        };
-
-        reloadConfig = {
-          name = "Rebuild system";
-          terminal = false;
-          exec = "kitty --hold -e sudo nixos-rebuild --upgrade switch";
-        };
-
         headPhonesBluetooth = {
           name = "Connect bluetooth headphones";
           terminal = false;
