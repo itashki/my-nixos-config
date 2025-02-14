@@ -380,6 +380,7 @@ in
     obs-studio
     xonotic
     evince
+    coolreader
     mpv
     mpvScripts.mpris
     helvum
