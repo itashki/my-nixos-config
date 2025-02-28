@@ -369,6 +369,7 @@ in
     gimp
     chromium
     tor-browser
+    librewolf
     telegram-desktop
     discord
     betterdiscordctl
