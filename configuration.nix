@@ -262,7 +262,19 @@ in
 
   programs.gamemode.enable = true;
   programs.java.enable = true;
-  programs.steam.enable = true;
+
+  programs.steam = {
+    enable = true;
+    package = with pkgs; steam.override {
+      extraPkgs = pkgs: [
+        jq
+        cabextract
+        wget
+        pkgsi686Linux.libpulseaudio
+      ];
+    };
+  };
+
   programs.firefox = {
     enable = true;
     # nativeMessagingHosts.ff2mpv = true;
@@ -279,20 +291,25 @@ in
     portal = {
       enable = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-kde
+        kdePackages.xdg-desktop-portal-kde
         xdg-desktop-portal-wlr
         xdg-desktop-portal-gtk
       ];
     };
   };
-  # services.flatpak.enable = true;
-  # systemd.services.flatpak-repo = {
-  #   wantedBy = [ "multi-user.target" ];
-  #   path = [ pkgs.flatpak ];
-  #   script = ''
-  #     flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-  #   '';
-  # };
+  services.flatpak.enable = true;
+  systemd.services.flatpak-repo = {
+    wantedBy = [ "multi-user.target" ];
+    path = [ pkgs.flatpak ];
+    script = ''
+      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    '';
+  };
+
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs;
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ktrd = {
@@ -366,7 +383,7 @@ in
 
     curlftpfs
 
-    gimp
+    gimp3
     chromium
     tor-browser
     librewolf
@@ -390,13 +407,12 @@ in
     nitrogen
     xwinwrap
     shotgun
-    hacksaw
+    slop
     xclip
     xdotool
     xsel
     xclicker
     tmux
-    kalker
     krita
     openscad
     f3d

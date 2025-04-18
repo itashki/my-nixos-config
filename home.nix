@@ -64,6 +64,7 @@
       terminal = "kitty";
       theme = "gruvbox-dark-soft";
     };
+
   };
 
   services = {
