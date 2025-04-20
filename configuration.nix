@@ -1,11 +1,11 @@
 { inputs, pkgs, ... }:
 let
   inherit (pkgs.stdenv.hostPlatform) system;
-  umu = inputs.umu.packages.${system}.umu.override {
-    version = inputs.umu.shortRev;
-    truststore = true;
-    cbor2 = true;
-  };
+  # umu = inputs.umu.packages.${system}.umu.override {
+  #   version = inputs.umu.shortRev;
+  #   truststore = true;
+  #   cbor2 = true;
+  # };
 in
 {
   imports = [
@@ -34,8 +34,8 @@ in
   environment.localBinInPath = true;
 
   environment.variables = {
-    VISUAL = "nv";
-    EDITOR = "nv";
+    VISUAL = "emacsclient -r -a emacs";
+    EDITOR = "emacsclient -r -a emacs";
   };
 
   nixpkgs.config.packageOverrides = pkgs: {
@@ -281,34 +281,9 @@ in
     nativeMessagingHosts.packages = [ pkgs.ff2mpv ];
   };
 
-  programs.haguichi.enable = true;
   services.zerotierone = {
     port = 9993;
     enable = true;
-  };
-
-  xdg = {
-    portal = {
-      enable = true;
-      extraPortals = with pkgs; [
-        kdePackages.xdg-desktop-portal-kde
-        xdg-desktop-portal-wlr
-        xdg-desktop-portal-gtk
-      ];
-    };
-  };
-  services.flatpak.enable = true;
-  systemd.services.flatpak-repo = {
-    wantedBy = [ "multi-user.target" ];
-    path = [ pkgs.flatpak ];
-    script = ''
-      flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-    '';
-  };
-
-  services.emacs = {
-    enable = true;
-    package = pkgs.emacs;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
@@ -348,26 +323,42 @@ in
 
     anydesk
 
-    mc
+    #doom emacs dependencies
+    ((emacsPackagesFor emacs).emacsWithPackages (epkgs: [
+      epkgs.vterm
+    ]))
+    cmake
+    gcc
+    nodejs
+    gnumake
+    libtool
+    fd
+    ripgrep
+    aspell
+    aspellDicts.en
+    aspellDicts.ru
+    aspellDicts.he
+    shellcheck # shell
+    shfmt
+    multimarkdown # markdown
+    dockfmt # docker
+    clang-tools # c/c++
+    nixfmt-rfc-style
+    libxml2 # xml
+    python313Packages.grip # markdown
+    html-tidy # html
+    stylelint # css
+    jsbeautifier # js
+    python3Full # python
+
     vim
     vscode.fhs
-    gnumake
     git
-    nodejs
-    bun
-    uiua
     htop
     xkb-switch
 
     ffmpeg
-    tree-sitter
-    ripgrep
-    cht-sh
-    unzip
-    unrar
     libsForQt5.qt5ct
-    file
-    openssl
 
     xwinwrap
     xfce.xfce4-pulseaudio-plugin
@@ -377,11 +368,6 @@ in
     xfce.xfce4-clipman-plugin
     xarchiver
     pavucontrol
-
-    xorg.xhost
-    xorg.xkill
-
-    curlftpfs
 
     gimp3
     chromium
@@ -396,26 +382,14 @@ in
 
     qbittorrent
     obs-studio
-    xonotic
     evince
     coolreader
     mpv
     mpvScripts.mpris
-    helvum
-    easyeffects
 
     nitrogen
-    xwinwrap
     shotgun
     slop
-    xclip
-    xdotool
-    xsel
-    xclicker
-    tmux
-    krita
-    openscad
-    f3d
 
     kitty
     kitty-themes
@@ -426,11 +400,12 @@ in
     prismlauncher
     gzdoom
     lutris
-    umu
+    umu-launcher
   ];
 
   fonts.packages = with pkgs; [
     nerd-fonts.fira-code
+    nerd-fonts.symbols-only
   ];
 
   # This value determines the NixOS release from which the default
