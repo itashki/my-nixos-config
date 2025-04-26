@@ -356,6 +356,8 @@ in
     git
     htop
     xkb-switch
+    xclip
+
 
     ffmpeg
     libsForQt5.qt5ct
